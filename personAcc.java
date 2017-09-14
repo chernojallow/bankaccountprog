@@ -20,7 +20,8 @@ public class personAcc {
     }
 
     public void viewBalance(){
-        System.out.println("Your balance is: $" + accountBal);
+        System.out.println("Your balance is: $" + accountBal + "\n");
+	System.out.println("****************************************");
     }
 
     public void deposit(double accountBal){
@@ -34,6 +35,7 @@ public class personAcc {
     public void viewInfo(){
         String info = new String("Welcome to your Account. \n" + "Name: " + name + "\nAccount Number: " + accountNum + "\nAccount Balance: $" + accountBal + "\n");
         System.out.println(info);
+	System.out.println("****************************************");
     }
 
     public String viewName(){

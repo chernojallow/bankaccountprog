@@ -27,7 +27,7 @@ class BankAccountProg{
         	for(int i = 0; i < personList.size(); i++){
             		personList.get(i).setAccount(i+1);	//sets an account number for each person added by 1 everytime
             		personList.get(i).setBalance(ran.nextInt(200) + 1);
-            		personList.get(i).viewInfo();
+            	//	personList.get(i).viewInfo();
         	}
 
 		Scanner sc = new Scanner(System.in);
@@ -36,47 +36,73 @@ class BankAccountProg{
         	authenticate(name); //calls out the method authenticate
     	}
 
-	public static void authenticate(String name){
+	    public static void authenticate(String name){
 
         for(int i = 0; i < personList.size(); i++){
+
             if(name.equals(personList.get(i).viewName())) {
-                int option = 0;
-
-                do {
-                        System.out.println("What would like to do?\n1. Deposit\n2. Withdraw\n3. View Balance\n4. View Info\n5. Exit");
-                        Scanner sc = new Scanner(System.in);
-                        option = sc.nextInt();
-
-                        switch (option) {
-                            case 1:
-                                System.out.println("How much do you want to deposit: ");
-                                int amount = sc.nextInt();
-                                personList.get(i).deposit(amount);
-                                break;
-                            case 2:
-                                System.out.println("How much do you want to withdraw: ");
-                                int amount2 = sc.nextInt();
-                                if (personList.get(i).getBalance() < amount2) {
-                                    System.out.println("Not enough funds!");
-                                } else
-                                    personList.get(i).withdraw(amount2);
-                                break;
-                            case 3:
-                                personList.get(i).viewBalance();
-                                break;
-                            case 4:
-                                personList.get(i).viewInfo();
-                                break;
-                            case 5:
-                            default:
-                                System.out.println("You exited the program");
-                                break;
-                        }
-                } while (option == 1 || option == 2 || option == 3 || option == 4);
+                passauthentication(personList.get(i));
+                break;
             }
                 //no else function
+            else if(i == personList.size() - 1){
+                System.out.println("No name found, Would you like to exit yes or no? ");
+                Scanner sc = new Scanner(System.in);
+                String name2 = sc.next();
+                if(name2.equalsIgnoreCase("no") || name2.equalsIgnoreCase("n")){
+                    System.out.println("Please enter name again: ");
+                    String ans = sc.next();
+                    authenticate(ans);
+                }
+                else if(name2.equalsIgnoreCase("yes") || name2.equalsIgnoreCase("y")){
+                    return;
+                }
+                else
+                {
+                    System.out.println("Unknown answer, program terminated!");
+                    return; //in case we don't get a yes or no answer
+                }
+            }
         }
-    }	
+    }
+
+    public static void passauthentication(personAcc name){
+
+        int option;
+        do {
+            System.out.println("What would like to do?\n1. Deposit\n2. Withdraw\n3. View Balance\n4. View Info\n5. Exit\n");
+            Scanner sc = new Scanner(System.in);
+            option = sc.nextInt();
+	    System.out.println("****************************************");
+
+            switch (option) {
+                case 1:
+                    System.out.println("How much do you want to deposit: \n");
+                    int amount = sc.nextInt();
+                    name.deposit(amount);
+                    break;
+                case 2:
+                    System.out.println("How much do you want to withdraw: \n");
+                    int amount2 = sc.nextInt();
+                    if (name.getBalance() < amount2) {
+                        System.out.println("Not enough funds!\n");
+			System.out.println("****************************************");
+                    } else
+                        name.withdraw(amount2);
+                    break;
+                case 3:
+                    name.viewBalance();
+                    break;
+                case 4:
+                    name.viewInfo();
+                    break;
+                case 5:
+                default:
+                    System.out.println("You exited the program\n");
+                    break;
+            }
+        } while (option == 1 || option == 2 || option == 3 || option == 4);
+    }
 }
 
 
