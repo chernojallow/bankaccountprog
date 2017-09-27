@@ -1,6 +1,7 @@
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Random;
@@ -8,16 +9,19 @@ import java.util.Random;
 class BankAccountProg{
 
 	static ArrayList<personAcc> personList;
+	//public static HashMap personList;
 
 	public static void main(String[] args) {
 
         	personList = new ArrayList<personAcc>();
+		//personList = new HasMap();
         	String names;
         	Random ran = new Random();
         	try{
             		BufferedReader read = new BufferedReader(new FileReader("names.txt"));
             	while((names = read.readLine()) != null){
                 	personList.add(new personAcc((names)));
+			//personList.put(new personAcc (names), ran.nextInt(200) + 1);
             		}
         	}
         	catch (Exception e){
